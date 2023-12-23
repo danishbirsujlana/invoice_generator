@@ -6,8 +6,10 @@ const CONFIG = require('./src/config');
 const bodyParser = require('body-parser');
 const router = require('./src/routes');
 
-app.use('/api', router)
 app.use(bodyParser.json());
+app.use(express.json());
+
+app.use('/api', router)
 
 app.listen(CONFIG.PORT, () => {
     console.log(`Server is running at http://localhost:${CONFIG.PORT}`)

@@ -1,5 +1,22 @@
-{/* <img src="https://evergreenlandscapingca.com/wp-content/uploads/2016/01/egl-logo.png" alt="..."> */ }
-const htmlContentA = `
+const fs = require('fs');
+// const imageBuffer = fs.readFileSync("");
+// const base64Image = imageBuffer.toString('base64');
+
+const setrRows = (items) => {
+    let result = ``;
+    items?.map((item) => {
+        result += `<tr class="row-items">
+        <td class="item">${item?.desc}</td>
+        <td class="item">${item?.rate}</td>
+        <td class="item">${item?.qty}</td>
+        <td class="item">${item?.amount}</td>
+    </tr>`
+    })
+    return result;
+}
+
+const htmlContentA = (data) => {
+    return `
 <!DOCTYPE html>
 <html lang="en">
 
@@ -31,7 +48,7 @@ const htmlContentA = `
             display: flex;
             background-color: #ebffeb;
             align-items: center;
-            padding: 10px 0;
+            padding: 10px;
         }
 
         #ts2 {
@@ -54,6 +71,7 @@ const htmlContentA = `
 
         .item {
             padding: 5px;
+            text-align: center;
         }
 
         .heading {
@@ -104,7 +122,7 @@ const htmlContentA = `
     <div id="top"></div>
     <div id="top-section">
         <div id="ts1">
-            <img src="./R.png" alt="...">
+            <img src="https://evergreenlandscapingca.com/wp-content/uploads/2016/01/egl-logo.png" alt="...">
         </div>
         <div id="ts2">
             <h2 class="ts-text">EverGreen Landscaping</h2>
@@ -114,22 +132,22 @@ const htmlContentA = `
         </div>
         <div id="ts3">
             <p class="ts-text ts-head">INVOICE</p>
-            <p class="ts-text">{inv no.}</p>
+            <p class="ts-text">${data?.invNo}</p>
             <p class="ts-text ts-head">DATE</p>
-            <p class="ts-text">{DATE}</p>
+            <p class="ts-text">${data?.date}</p>
             <p class="ts-text ts-head">DUE</p>
-            <p class="ts-text">{DUE DATE}</p>
+            <p class="ts-text">${data?.due}</p>
             <p class="ts-text ts-head">BALANCE DUE</p>
-            <p class="ts-text">{BD}</p>
+            <p class="ts-text">${data?.balance}</p>
         </div>
     </div>
 
-    <div style="margin: 15px 10px;">
+    <div style="margin: 15px 15px;">
         <p style="font-size: 12px; font-weight: bold; margin: 6px 0;">Bill To</p>
-        <p class="ts-text">{Name}</p>
-        <p class="ts-text">{address}</p>
-        <p class="ts-text">{ph num}</p>
-        <p class="ts-text">{email}</p>
+        <p class="ts-text">${data?.name}</p>
+        <p class="ts-text">${data?.address}</p>
+        <p class="ts-text">${data?.phNum}</p>
+        <p class="ts-text">${data?.email}</p>
     </div>
 
     <div id="tables">
@@ -140,20 +158,9 @@ const htmlContentA = `
                     <th class="item heading">RATE</th>
                     <th class="item heading">QTY</th>
                     <th class="item heading">AMOUNT</th>
-                </tr>
-                <tr class="row-items">
-                    <td class="item">Alfreds Futterkiste</td>
-                    <td class="item">Maria Anders</td>
-                    <td class="item">Germany</td>
-                    <td class="item">Germany</td>
-                </tr>
-                <tr class="row-items">
-                    <td class="item">Centro comercial Moctezuma</td>
-                    <td class="item">Francisco Chang</td>
-                    <td class="item">Mexico</td>
-                    <td class="item">Mexico</td>
-                </tr>
-            </table>
+                </tr>`
+        + setrRows(data?.items) +
+        `</table>
         </div>
 
         <div id="table-content-lower">
@@ -161,25 +168,19 @@ const htmlContentA = `
                 <tr class="row-items">
                     <td class="itemk">
                         <p style="flex: 1;">Sub Total</p>
-                        <p>100</p>
+                        <p>${data?.subTotal}</p>
                     </td>
                 </tr>
                 <tr class="row-items">
                     <td class="itemk">
                         <p style="flex: 1;">Tax (8%)</p>
-                        <p>100</p>
+                        <p>${data?.tax}</p>
                     </td>
                 </tr>
                 <tr class="row-items">
                     <td class="itemk">
                         <p style="flex: 1;">Total</p>
-                        <p>100</p>
-                    </td>
-                </tr>
-                <tr class="row-items">
-                    <td class="itemk">
-                        <p style="flex: 1;">Balance Due</p>
-                        <p>100</p>
+                        <p>${data?.total}</p>
                     </td>
                 </tr>
             </table>
@@ -191,15 +192,24 @@ const htmlContentA = `
             <p class="bottom-text">Sign</p>
         </div>
         <div>
-            <p class="bottom-text">Phone Number: 9501622531</p>
+            <p class="bottom-text">Phone Number: ${data?.senderPhNum}</p>
         </div>
         <div>
-            <p class="bottom-text">email: email@jefej8.409</p>
+            <p class="bottom-text">email: ${data?.senderEmail}</p>
         </div>
     </div>
 </body>
 
 </html>
     `;
+}
 
 module.exports = htmlContentA;
+
+{/* <img src="https://evergreenlandscapingca.com/wp-content/uploads/2016/01/egl-logo.png" alt="..."> */ }
+{/* <tr class="row-items">
+    <td class="item">Alfreds Futterkiste</td>
+    <td class="item">Maria Anders</td>
+    <td class="item">Germany</td>
+    <td class="item">Germany</td>
+</tr> */}
