@@ -1,3 +1,5 @@
+{/* <img src="https://evergreenlandscapingca.com/wp-content/uploads/2016/01/egl-logo.png" alt="..."> */ }
+const htmlContentA = `
 <!DOCTYPE html>
 <html lang="en">
 
@@ -29,6 +31,7 @@
             display: flex;
             background-color: #ebffeb;
             align-items: center;
+            padding: 10px 0;
         }
 
         #ts2 {
@@ -197,3 +200,6 @@
 </body>
 
 </html>
+    `;
+
+module.exports = htmlContentA;
